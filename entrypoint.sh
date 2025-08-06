@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo ""
+echo "Welcome to FinanzTip's ansible container image!"
+echo ""
+echo "To run ansible commands, mount your playbooks directory to /mnt."
+echo "You should also mount your SSH keys to /root/.ssh/ for accessing remote hosts."
+echo "The ansible vault key should as well be mounted to /root/.finanztip if needed."
+echo "You can run the container with the following command from the root directory of the ansible repository:"
+echo "docker run -it --rm -v ~/.ssh:/root/.ssh -v ~/.finanztip:/root/.finanztip -v $(pwd):/mnt ansible_finanztip:latest"
+echo ""
+echo "To generate a new vault secret, go to the /mnt/inventory/live directory and run:"
+echo "make -f Makefile encrypt-string"
+echo "Do not hit enter when you paste your key but use Ctrl+D twice to finish the input."
+echo ""
+echo "You can now run ansible commands like this:"
+echo "time ansible-playbook ../../playbooks/ping.yml --limit="live-hetzner-*" --diff --check"
+echo ""
+
+exec "$@"
