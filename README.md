@@ -9,5 +9,6 @@ docker build -t ansible_finanztip:latest .
 ## Run image
 
 ```bash
-docker run -it -v ~/.ssh:/root/.ssh/ -v ~/git/github.com/devops.ansible-2023/:/mnt --entrypoint bash ansible_finanztip:latest
+export USERNAME=your_ssh_username
+docker run -it --rm --name ansible -e "ANSIBLE_REMOTE_USER=${USERNAME}" -v ~/.ssh:/root/.ssh -v ~/.finanztip:/root/.finanztip -v $(pwd):/mnt ansible_finanztip:latest
 ```
